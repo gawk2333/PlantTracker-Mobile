@@ -5,7 +5,9 @@ import HomeScreen from "./App/screens/HomeScreen";
 import WelcomeScreen from "./App/screens/WelcomeScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { Provider } from 'react-redux';
+import  { store } from './redux/redux'
+import AddSpecies from './App/screens/AddSpecies';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,12 +15,15 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-         <Stack.Screen name = 'WelcomeScreen' component = {WelcomeScreen}  options = {{title: 'BunnyPlantTracker'}} />
-         <Stack.Screen name = 'HomeScreen' component = {HomeScreen} options = {{title: 'Home'}} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store = {store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name = 'WelcomeScreen' component = {WelcomeScreen}  options = {{title: 'BunnyPlantTracker'}} />
+          <Stack.Screen name = 'HomeScreen' component = {HomeScreen} options = {{title: 'Home'}} />
+          <Stack.Screen name = 'AddSpecies' component = {AddSpecies} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

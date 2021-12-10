@@ -5,13 +5,44 @@ import SpecieScreen from './SpecieScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
+
 const Tabs = createBottomTabNavigator()
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({navigation}) => {
   return (
-       <Tabs.Navigator>
+       <Tabs.Navigator screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Plant') {
+            iconName = focused
+              ? 'water'
+              : 'water-outline';
+            size = focused
+              ? 25
+              : 20;
+            color = focused
+              ? 'green'
+              : 'black';
+          } else if (route.name === 'Specie') {
+            iconName = focused 
+            ? "leaf"
+            : "leaf-outline" 
+            size = focused
+            ? 25
+            : 20;
+          color = focused
+            ? 'green'
+            : 'black';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}>
           <Tabs.Screen name="Plant" component = {PlantScreen} option = {{title: 'Plant'}}/>
-          <Tabs.Screen name="Specie" component = {SpecieScreen} option = {{title: 'Specie'}}/>
+          <Tabs.Screen name="Specie" component = {SpecieScreen} option = {{title: 'Specie'}}  navigation= {navigation}/>
         </Tabs.Navigator>
   )
 }

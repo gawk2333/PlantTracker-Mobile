@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, ImageBackground } from 'react-native'
 
 const PlantScreen = () => {
   return (
     <View style = {styles.background}>
-      <Text>Plant</Text>
+      <ImageBackground source = {require("../assets/Genshin1.jpeg")} style = {styles.bgimage} resizeMode = 'cover'/>
     </View>
   )
 }
@@ -13,9 +13,13 @@ export default PlantScreen
 
 const styles = StyleSheet.create({
   background:{
-    backgroundColor:'green',
+    backgroundColor:'#fffff4',
     justifyContent:'center',
     alignItems: 'center',
     flex:1,
+  },
+  bgimage: {
+    width: "100%",
+    height: "100%",
   }
 })
