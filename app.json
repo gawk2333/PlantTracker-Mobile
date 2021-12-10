@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "PlantBunnyTracker",
-    "slug": "Fun!",
+    "name": "PlantTracker",
+    "slug": "Fun",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./App/assets/icon.png",

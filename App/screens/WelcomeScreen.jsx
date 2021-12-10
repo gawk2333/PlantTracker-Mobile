@@ -1,7 +1,8 @@
 import React from 'react'
 import {Image, ImageBackground, StyleSheet, Text,View, Button} from 'react-native'
 
-export default function WelcomeScreen() {
+
+export default function WelcomeScreen({navigation}) {
   return (
     <ImageBackground
     source = { require("../assets/background.jpg") }
@@ -12,7 +13,7 @@ export default function WelcomeScreen() {
         <Text>Track Bunny and Plants everyday!</Text>
       </View>
       <View style = {styles.buttoncontainer}>
-        <Button title = "GetStart!" style = {styles.button}/>
+        <Button title = "GetStart!" style = {styles.button} onPress={() => navigation.navigate('HomeScreen')}/>
       </View>
     </ImageBackground>
   )
