@@ -6,7 +6,7 @@ import WelcomeScreen from "./App/screens/WelcomeScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
-import  { store } from './redux/redux'
+import  { store } from './redux/'
 import AddSpecies from './App/screens/AddSpecies';
 
 const Stack = createNativeStackNavigator();

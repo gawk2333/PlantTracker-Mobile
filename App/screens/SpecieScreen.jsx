@@ -1,30 +1,36 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native'
+import EachSpecie from '../components/EachSpecie'
 
-const SpecieScreen = ({navigation}) => {
+const SpecieScreen = ({ navigation,species }) => {
   return (
     <View style = {styles.background}>
-      <ImageBackground source = {require("../assets/Genshin2.jpg")} style = {styles.bgimage} resizeMode = 'cover'> 
+      <View style={styles.specielist}>
+          {species?.map(specie => {
+              return <EachSpecie key={specie.Common} specie={specie} />
+          })}
+        </View>
         <View style = { styles.addbutton }>
           <Button title = 'Add'  onPress = {()=>navigation.navigate("AddSpecies")} />
         </View>
-      </ImageBackground>
     </View>
   )
 }
 
-export default SpecieScreen
+function mapStatetoProps(state)
+{
+  return {
+    species: state.species,
+  }
+}
+
+export default connect(mapStatetoProps)(SpecieScreen)
 
 const styles = StyleSheet.create({
   background:{
     flex:1,
     backgroundColor:'#fffff4',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgimage: {
-    width: "100%",
-    height: "100%",
     justifyContent: 'flex-end',
     alignItems:'center'
   },
@@ -33,5 +39,10 @@ const styles = StyleSheet.create({
     height: 40,
     position: 'relative',
     bottom:20,
+  },
+  specielist: {
+    position: 'relative',
+    width: '100%',
+    height: '80%',
   }
 })
