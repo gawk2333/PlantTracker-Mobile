@@ -1,15 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions} from 'react-native'
+import { StyleSheet, Text, View, Button, Dimensions, Pressable} from 'react-native'
+
+const Separator = () => <View style={styles.separator} />
 
 const EachSpecie = ({specie}) => {
   return (
-    <View style ={styles.container}>
-      <View style = {styles.child2}><Text>Common: {specie.Common}</Text></View>
-      <View style = {styles.child2}><Text>Scientific: {specie.Scientific}</Text></View>
-      <View style = {styles.child2}><Text>WaterAmount: {specie.WaterAmount}</Text></View>
-      <View style = {styles.child1}><Text>WaterFrequency: {specie.WaterFrequency}</Text></View>
-      <View style = {styles.child2}><Text>LightAmount: {specie.LightAmount}</Text></View>
-    </View>
+    <>
+    <Pressable style ={styles.container}>
+      <View style = {styles.child}><Text style={styles.commontext}>{specie.Common}</Text></View>
+    </Pressable>
+    <Separator />
+    </>
   )
 }
 
@@ -17,21 +18,36 @@ export default EachSpecie
 
 const styles = StyleSheet.create({
   container:{
-    borderColor: 'grey',
-    borderWidth: 1,
-    width: Dimensions.get("window").width,
-    height: 80,
-    flexDirection: 'column',
+    width: '80%',
+    height: 70,
+    flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor: '#a8dad4',
+    borderRadius:30,
+    paddingTop:20,
   },
-  child1:{
-    width: Dimensions.get("screen").width/2,
-    height:24,
+  child:{
+    width: '100%',
+    height:96,
+    alignItems: 'center',
   },
-  child2:{
-    width: Dimensions.get("screen").width/3,
-    height:24,
-  }
+  commontext:{
+    fontStyle: "normal",
+    fontSize: 48,
+  },
+  scientificext:{
+    fontStyle: "italic",
+    fontSize: 48,
+    color: 'grey',
+  },
+  separator: {
+    flex:0.1,
+    position: 'relative',
+    width: '80%',
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
 })

@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView} from 'react-native'
 import EachSpecie from '../components/EachSpecie'
 
 const SpecieScreen = ({ navigation,species }) => {
   return (
     <View style = {styles.background}>
-      <View style={styles.specielist}>
+      <ScrollView contentContainerStyle={styles.specielist} showsHorizontalScrollIndicator='false'>
           {species?.map(specie => {
               return <EachSpecie key={specie.Common} specie={specie} />
           })}
-        </View>
+        </ScrollView>
         <View style = { styles.addbutton }>
           <Button title = 'Add'  onPress = {()=>navigation.navigate("AddSpecies")} />
         </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#fffff4',
     justifyContent: 'flex-end',
-    alignItems:'center'
+    alignItems : 'center',
   },
   addbutton: {
     width: '100%',
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
   specielist: {
     position: 'relative',
     width: '100%',
-    height: '80%',
+    marginBottom:10,
   }
 })
