@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, Dimensions, Pressable} from 'react-native'
+import { StyleSheet, Text, View, Pressable} from 'react-native'
 
 const Separator = () => <View style={styles.separator} />
 
-const EachSpecie = ({specie}) => {
+const EachSpecie = ({navigation, specie}) => {
   return (
     <>
-    <Pressable style ={styles.container}>
+    <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManageSpecies",{specie:specie})}>
       <View style = {styles.child}><Text style={styles.commontext}>{specie.Common}</Text></View>
     </Pressable>
     <Separator />

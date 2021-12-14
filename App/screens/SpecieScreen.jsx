@@ -8,7 +8,7 @@ const SpecieScreen = ({ navigation,species }) => {
     <View style = {styles.background}>
       <ScrollView contentContainerStyle={styles.specielist} showsHorizontalScrollIndicator='false'>
           {species?.map(specie => {
-              return <EachSpecie key={specie.Common} specie={specie} />
+              return <EachSpecie key={specie.Common} specie={specie} navigation={navigation}/>
           })}
         </ScrollView>
         <View style = { styles.addbutton }>

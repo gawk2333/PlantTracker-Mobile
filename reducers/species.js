@@ -1,4 +1,4 @@
-import { ADD_SPECIE } from "../actions/species";
+import { ADD_SPECIE, EDIT_SPECIE, DELETE_SPECIE} from "../actions/species";
 //
 //InitialState
 //
@@ -9,6 +9,11 @@ const reducer = (state = InitialState , action) => {
   {
     case ADD_SPECIE:
       return [...state,action.species]
+    case EDIT_SPECIE:
+      const newState = state.filter(specie => specie.Common !== action.species.Common)
+      return [...newState,action.species]
+    case DELETE_SPECIE:
+      return  state.filter(specie => specie.Common !== action.species.Common)
     default:
       return state;
   }
