@@ -6,9 +6,12 @@ import { editPlant, deletePlant } from '../../actions/plants'
 
 const AddPlant = ({navigation, dispatch, species, route}) => {
   const plant = route.params.plant
+
   useEffect(()=>{
-    setPlantName(plant.PlantName)
-    setSpecieHandler(plant.SpecieCommon)
+    if(species){
+      setPlantName(plant.PlantName)
+      setSpecieHandler(plant.SpecieCommon)
+    }
   },[])
 
   const setSpecieHandler = (commonname) => {
@@ -41,6 +44,7 @@ const AddPlant = ({navigation, dispatch, species, route}) => {
       if(Common!==plant.Common)
       {
         dispatch(editPlant(newplant))
+        Alert.alert("Edited!")
       }
       setEditState(!editState)
       navigation.goBack()
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     color : 'red',
   },
   buttonwrap:{
-    flex:1,
+    flex:2,
     marginBottom:20,
     width: "80%",
     height:35,
