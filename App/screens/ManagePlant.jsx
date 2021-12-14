@@ -1,49 +1,49 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, TextInput, Button,Alert} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { connect } from 'react-redux'
-import { editSpecie, deleteSpecie } from '../../actions/species'
+import { editPlant, deletePlant } from '../../actions/plants'
 
-const ManageSpecies = ({navigation, dispatch, route}) => {
-  const specie = route.params.specie
+const AddPlant = ({navigation, dispatch, species, route}) => {
+  const plant = route.params.plant
   useEffect(()=>{
-    setCommon(specie.Common)
-    setScientific(specie.Scientific)
-    setWaterAmount(specie.WaterAmount)
-    setWaterFrequency(specie.WaterFrequency)
-    setLightAmount(specie.LightAmount)
+    setPlantName(plant.PlantName)
+    setSpecieHandler(plant.SpecieCommon)
   },[])
 
+  const setSpecieHandler = (commonname) => {
+    setCommon(commonname)
+    var choosedspecie = species.find(specie => specie.Common === commonname)
+    setScientific(choosedspecie.Scientific)
+    setWaterAmount(choosedspecie.WaterAmount)
+    setWaterFrequency(choosedspecie.WaterFrequency)
+    setLightAmount(choosedspecie.LightAmount)
+  }
 
+  const [editState, setEditState] = useState(false)
+  const [PlantName, setPlantName] = useState("")
   const [Common, setCommon] = useState("")
   const [Scientific, setScientific] = useState("")
-  const [WaterAmount, setWaterAmount] = useState("Give me some drips")
+  const [WaterAmount, setWaterAmount] = useState("")
   const [WaterFrequency, setWaterFrequency] = useState("")
-  const [LightAmount, setLightAmount] = useState("I really don't mind")
+  const [LightAmount, setLightAmount] = useState("")
 
   const Separator = () => <View style={styles.separator} />
   const BtnSeparator = () => <View style={styles.btnseparator} />
 
   const editHandler = () => {
-    const  Specie= {
-      Common: Common,
-      Scientific : Scientific,
-      WaterAmount : WaterAmount,
-      WaterFrequency : WaterFrequency,
-      LightAmount : LightAmount,
+    const newplant = {
+      PlantName: PlantName,
+      SpecieCommon: Common,
     }
     if(editState)
     {
-      if(JSON.stringify(Specie)!==JSON.stringify(specie))
+      if(Common!==plant.Common)
       {
-        dispatch(editSpecie(Specie))
-        setEditState(!editState)
-        navigation.goBack()
+        dispatch(editPlant(newplant))
       }
-      else{
-        setEditState(!editState)
-        navigation.goBack()
-      }
+      setEditState(!editState)
+      navigation.goBack()
     }
     else{
       setEditState(!editState)
@@ -51,93 +51,98 @@ const ManageSpecies = ({navigation, dispatch, route}) => {
   }
 
   const deleteHandler = () => {
-    const  Specie= {
-      Common: Common,
-      Scientific : Scientific,
-      WaterAmount : WaterAmount,
-      WaterFrequency : WaterFrequency,
-      LightAmount : LightAmount,
+    const newplant = {
+      PlantName: PlantName,
+      SpecieCommon: Common,
     }
-    dispatch(deleteSpecie(Specie))
+    dispatch(deletePlant(newplant))
     navigation.goBack()
   }
-  
-  const [editState, setEditState] = useState(false)
 
   return (
       <View style={styles.background}>
         <View style = {styles.inputwrap}>
-          <Text style = {styles.label}>Common Name: </Text>
+          <Text style = {styles.label}>Plant Name: </Text>
            <TextInput
-        editable={editState}
-        value={Common}
+        editable = {false}
+        value={PlantName}
         style={styles.input}
-        placeholder="Common Name"
-        onChangeText={(Common) => {
-          setCommon(Common)
+        placeholder="Plant Name"
+        onChangeText={(PlantName) => {
+          setPlantName(PlantName)
         }}
       />
-        </View>
+      </View>
+
         <Separator/>
-        <View style = {styles.inputwrap}>
-          <Text style = {styles.label}>Scientific Name: </Text>
-           <TextInput
-         editable={editState}
-        value={Scientific}
-        style={styles.input}
-        placeholder="Scientific"
-        onChangeText={(Scientific) => {
-          setScientific(Scientific)
-        }}
-      />
-        </View>
-        <Separator/>
-        <View style = {styles.pickerwrap}>
-          <Text style = {styles.label}>WaterAmount: </Text>
+
+      <View style = {styles.pickerwrap}>
+          <Text style = {styles.label}>Specie: </Text>
       <Picker
         enabled={editState}
         mode = {'dropdown'}
-        selectedValue={WaterAmount}
+        selectedValue={Common}
         style={ styles.input }
-        onValueChange={(wateramount, itemIndex) => setWaterAmount(wateramount)}
+        onValueChange={(common, itemIndex) => setSpecieHandler(common)}
       >
-        <Picker.Item label="Give me some drips" value="Give me some drips" />
-        <Picker.Item label="Give me a dollop" value="Give me a dollop" />
-        <Picker.Item label="Moisten me" value="Moisten me" />
-        <Picker.Item label="Soak me" value="Soak me" />
+        { species?.map(specie => {
+             return (
+              <Picker.Item key={Common} label={specie.Common} value={specie.Common} />
+             )
+        })}
       </Picker>
+      </View>
+      
+      <Separator/>
+
+      <View style = {styles.inputwrap}>
+          <Text style = {styles.label}>Scientific Name: </Text>
+           <TextInput
+          editable = {false}
+          value={Scientific}
+          style={styles.numinput}
+          placeholder="Scientific Name"
+      />
         </View>
+
+      <Separator/>
+
+      <View style = {styles.inputwrap}>
+          <Text style = {styles.label}>WaterAmount: </Text>
+           <TextInput
+          editable = {false}
+          value={WaterAmount}
+          style={styles.numinput}
+          placeholder="WaterAmount"
+      />
+        </View>
+
         <Separator/>
+
         <View style = {styles.inputwrap}>
           <Text style = {styles.label}>WaterFrequency: </Text>
            <TextInput
-           editable={editState}
-           keyboardType = 'number-pad'
+           editable = {false}
           value={WaterFrequency}
           style={styles.numinput}
           placeholder="WaterFrequency"
-          onChangeText={(WaterFrequency) => {
-          setWaterFrequency(WaterFrequency)
-        }}
       />
         </View>
+
         <Separator/>
+
         <View style = {styles.inputwrap}>
           <Text style = {styles.label}>LightAmount: </Text>
-          <Picker
-        enabled={editState}
-        mode = {'dropdown'}
-        selectedValue={LightAmount}
-        style={ styles.input }
-        onValueChange={(itemValue, itemIndex) => setLightAmount(itemValue)}
-      >
-        <Picker.Item label="I really don't mind" value="I really don't mind" />
-        <Picker.Item label="Shady" value="Shady" />
-        <Picker.Item label="Indirect light" value="Indirect light" />
-        <Picker.Item label="Direct sun" value="Direct sun" />
-      </Picker>
+           <TextInput
+          editable = {false}
+          value={LightAmount}
+          style={styles.numinput}
+          placeholder="LightAmount"
+      />
         </View>
+
         <Separator/>
+
         <View style = {styles.buttonwrap}>
             <Button style = {styles.button} color = 'red' title = "Edit" onPress = {editHandler}></Button>
             <BtnSeparator/>
@@ -149,8 +154,13 @@ const ManageSpecies = ({navigation, dispatch, route}) => {
   )
 }
 
+const mapStatetoProps = (state) => {
+  return {
+      species : state.species,
+  }
+}
 
-export default connect()(ManageSpecies)
+export default connect(mapStatetoProps)(AddPlant)
 
 const styles = StyleSheet.create({
   background:{
@@ -202,13 +212,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button:{
-    flex:1,
     width:50,
     height:30,
     color : 'red',
   },
   buttonwrap:{
-    flex:2,
+    flex:1,
     marginBottom:20,
     width: "80%",
     height:35,

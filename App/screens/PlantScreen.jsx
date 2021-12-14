@@ -1,25 +1,48 @@
 import React from 'react'
-import { StyleSheet, View, ImageBackground } from 'react-native'
+import { StyleSheet, View, ScrollView, Button } from 'react-native'
+import { connect } from 'react-redux'
+import EachPlant from '../components/EachPlant'
 
-const PlantScreen = () => {
+
+const PlantScreen = ({navigation,plants}) => {
   return (
     <View style = {styles.background}>
-      <ImageBackground source = {require("../assets/Genshin1.jpeg")} style = {styles.bgimage} resizeMode = 'cover'/>
+      <ScrollView contentContainerStyle={styles.plantlist} showsHorizontalScrollIndicator='false'>
+          {plants?.map(plant => {
+              return <EachPlant key={plant.Common} plant={plant} navigation={navigation}/>
+          })}
+        </ScrollView>
+        <View style = { styles.addbutton }>
+          <Button title = 'Add'  onPress = {()=>navigation.navigate("AddPlant")} />
+        </View>
     </View>
   )
 }
 
-export default PlantScreen
+const mapStatetoProps = (state) => {
+  return {
+    plants: state.plants
+  }
+}
+
+export default connect(mapStatetoProps)(PlantScreen)
 
 const styles = StyleSheet.create({
   background:{
-    backgroundColor:'#fffff4',
-    justifyContent:'center',
-    alignItems: 'center',
     flex:1,
+    backgroundColor:'#fffff4',
+    justifyContent: 'flex-end',
+    alignItems : 'center',
   },
-  bgimage: {
-    width: "100%",
-    height: "100%",
+  addbutton: {
+    width: '100%',
+    height: 40,
+    position: 'relative',
+    bottom:20,
+  },
+  plantlist: {
+    position: 'relative',
+    width: '100%',
+    marginBottom:10,
   }
 })
