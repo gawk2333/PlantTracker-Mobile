@@ -9,7 +9,7 @@ const PlantScreen = ({navigation,plants}) => {
     <View style = {styles.background}>
       <ScrollView contentContainerStyle={styles.plantlist} showsHorizontalScrollIndicator='false'>
           {plants?.map(plant => {
-              return <EachPlant key={plant.Common} plant={plant} navigation={navigation}/>
+              return <EachPlant key={plant.PlantName} plant={plant} navigation={navigation}/>
           })}
         </ScrollView>
         <View style = { styles.addbutton }>

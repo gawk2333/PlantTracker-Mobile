@@ -7,12 +7,15 @@ import { addPlant } from '../../actions/plants'
 const AddPlant = ({navigation, dispatch, plants, species}) => {
 
   const setSpecieHandler = (commonname) => {
-    setCommon(commonname)
-    var choosedspecie = species.find(specie => specie.Common === commonname)
-    setScientific(choosedspecie.Scientific)
-    setWaterAmount(choosedspecie.WaterAmount)
-    setWaterFrequency(choosedspecie.WaterFrequency)
-    setLightAmount(choosedspecie.LightAmount)
+    if(commonname)
+    {
+      setCommon(commonname)
+      var choosedspecie = species.find(specie => specie.Common === commonname)
+      setScientific(choosedspecie.Scientific)
+      setWaterAmount(choosedspecie.WaterAmount)
+      setWaterFrequency(choosedspecie.WaterFrequency)
+      setLightAmount(choosedspecie.LightAmount)
+    }
   }
 
   const [PlantName, setPlantName] = useState("")

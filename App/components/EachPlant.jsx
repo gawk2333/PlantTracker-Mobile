@@ -6,7 +6,7 @@ const Separator = () => <View style={styles.separator} />
 const EachPlant = ({navigation, plant}) => {
   return (
     <>
-    <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManageSpecies",{plant:plant})}>
+    <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManagePlant",{plant:plant})}>
       <View style = {styles.child}><Text style={styles.commontext}>{plant.PlantName}</Text></View>
     </Pressable>
     <Separator />

@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import  { store } from './redux/'
 import AddSpecies from './App/screens/AddSpecies';
 import ManageSpecies from './App/screens/ManageSpecies';
+import ManagePlant from './App/screens/ManagePlant';
 import AddPlant from './App/screens/AddPlant'
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ export default function App() {
           <Stack.Screen name = 'HomeScreen' component = {HomeScreen} options = {{title: 'Home'}} />
           <Stack.Screen name = 'AddSpecies' component = {AddSpecies} />
           <Stack.Screen name = 'ManageSpecies' component = {ManageSpecies} />
+          <Stack.Screen name = 'ManagePlant' component = {ManagePlant} />
           <Stack.Screen name = 'AddPlant' component = {AddPlant} />
         </Stack.Navigator>
       </NavigationContainer>
