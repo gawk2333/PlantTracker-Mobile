@@ -13,7 +13,7 @@ export default function WelcomeScreen({navigation}) {
         <Text>Track Bunny and Plants everyday!</Text>
       </View>
       <View style = {styles.buttoncontainer}>
-        <Button title = "GetStart!" style = {styles.button} onPress={() => navigation.navigate('HomeScreen')}/>
+        <Button title = "Start!" style = {styles.button} onPress={() => navigation.navigate('HomeScreen')}/>
       </View>
     </ImageBackground>
   )
