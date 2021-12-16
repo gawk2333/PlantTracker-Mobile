@@ -10,7 +10,7 @@ export default function WelcomeScreen({navigation}) {
     >
       <View style = {styles.logocontainer}>
         <Image source={ require('../assets/bunny.png') } style = { styles.logo } />
-        <Text>Track Bunny and Plants everyday!</Text>
+        <Text>Track Plants everyday!</Text>
       </View>
       <View style = {styles.buttoncontainer}>
         <Button title = "Start!" style = {styles.button} onPress={() => navigation.navigate('HomeScreen')}/>

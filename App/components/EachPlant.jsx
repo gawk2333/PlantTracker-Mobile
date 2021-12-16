@@ -1,24 +1,37 @@
 import React from 'react'
 import { StyleSheet, Text, View, Pressable} from 'react-native'
+import { editPlant } from '../../actions/plants'
+import { connect } from 'react-redux'
 
-const Separator = () => <View style={styles.separator} />
+const Separator = ({}) => <View style={styles.separator} />
 
-const EachPlant = ({navigation, plant}) => {
+const EachPlant = ({navigation, plant, dispatch}) => {
+  const WaterHandler = () => {
+      plant.lastWateredTime = Date.now()
+      dispatch(editPlant(plant))
+      console.log(plant)
+  }
+
   return (
     <>
-    <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManagePlant",{plant:plant})}>
-      <View style = {styles.child}><Text style={styles.commontext}>{plant.PlantName}</Text></View>
-    </Pressable>
+        <View style = {styles.wholecontainer}>
+            <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManagePlant",{plant:plant})}>
+              <View style = {styles.child}><Text style={styles.commontext}>{plant.PlantName}</Text></View>
+            </Pressable>
+            <Pressable style={styles.waterclick} backgroundColor='green' onPress={WaterHandler}>
+              <Text>{plant.lastWateredTime? plant.lastWateredTime : null}</Text>
+            </Pressable>
+        </View>
     <Separator />
     </>
   )
 }
 
-export default EachPlant
+export default connect()(EachPlant)
 
 const styles = StyleSheet.create({
   container:{
-    width: '80%',
+    width: '70%',
     height: 70,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -30,24 +43,31 @@ const styles = StyleSheet.create({
   },
   child:{
     width: '100%',
-    height:96,
+    height:80,
     alignItems: 'center',
   },
   commontext:{
     fontStyle: "normal",
     fontSize: 48,
   },
-  scientificext:{
-    fontStyle: "italic",
-    fontSize: 48,
-    color: 'grey',
+  wholecontainer:{
+    width: '90%',
+    height:80,
+    flexDirection: 'row',
   },
   separator: {
-    flex:0.1,
+    flex:0.5,
     position: 'relative',
-    width: '80%',
+    width: '90%',
     marginVertical: 8,
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  waterclick:{
+    width:'20%',
+    height: 80,
+    borderWidth:1,
+    borderColor:'black',
+    marginLeft:20,
+  }
 })

@@ -8,9 +8,10 @@ const reducer = (state = InitialState, action) => {
       case ADD_PLANT:
         return [...state,action.plants]
       case EDIT_PLANT:
-        return [...state.filter(plant => plant.Common !== action.plants.Common),action.plants]
+        const editedState = [...state.filter(plant => plant.PlantName !== action.plants.PlantName), action.plants]
+        return editedState
       case DELETE_PLANT:
-        return state.filter(plant => plant.Common !== action.plants.Common)
+        return state.filter(plant => plant.PlantName !== action.plants.PlantName)
       default:
         return state
     }
