@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker'
 import { connect } from 'react-redux'
 import { addPlant } from '../../actions/plants'
 
-const AddPlant = ({navigation, dispatch, plants, species}) => {
+const AddPlant = ({navigation, dispatch, species}) => {
 
   const setSpecieHandler = (commonname) => {
     if(commonname)

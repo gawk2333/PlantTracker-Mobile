@@ -34,7 +34,6 @@ const HomeScreen = ({navigation}) => {
             ? 'green'
             : 'black';
           }
-
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -42,7 +41,7 @@ const HomeScreen = ({navigation}) => {
         tabBarInactiveTintColor: 'gray',
       })}>
           <Tabs.Screen name="Plant" component = {PlantScreen} option = {{title: 'Plant'}}/>
-          <Tabs.Screen name="Specie" component = {SpecieScreen} option = {{title: 'Specie'}}  navigation= {navigation}/>
+          <Tabs.Screen name="Specie" component = {SpecieScreen} option = {{title: 'Species'}}/>
         </Tabs.Navigator>
   )
 }
