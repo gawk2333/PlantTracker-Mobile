@@ -1,4 +1,4 @@
-import { ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from "../actions/plants"
+import { ADD_PLANT, DELETE_PLANT, EDIT_PLANT, PURGE_PLANT } from "../actions/plants"
 
 const InitialState = []
 
@@ -12,6 +12,8 @@ const reducer = (state = InitialState, action) => {
         return editedState
       case DELETE_PLANT:
         return state.filter(plant => plant.PlantName !== action.plants.PlantName)
+      case PURGE_PLANT:
+        return []
       default:
         return state
     }

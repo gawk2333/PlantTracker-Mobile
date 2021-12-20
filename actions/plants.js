@@ -1,6 +1,7 @@
 export const ADD_PLANT = 'ADD_PLANT'
 export const EDIT_PLANT = 'EDIT_PLANT'
 export const DELETE_PLANT = 'DELETE_PLANT'
+export const PURGE_PLANT = 'PURGE_PLANT'
 
 export const addPlant = (plants) => {
   return {
@@ -20,5 +21,11 @@ export const deletePlant = (plants) => {
   return {
     type: DELETE_PLANT,
     plants
+  }
+}
+
+export const purgePlant = () => {
+  return {
+    type: PURGE_PLANT
   }
 }
