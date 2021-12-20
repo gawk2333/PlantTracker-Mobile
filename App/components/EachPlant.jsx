@@ -3,23 +3,37 @@ import { StyleSheet, Text, View, Pressable} from 'react-native'
 import { editPlant } from '../../actions/plants'
 import { connect } from 'react-redux'
 
-const Separator = ({}) => <View style={styles.separator} />
+
+const Separator = () => <View style={styles.separator} />
 
 const EachPlant = ({navigation, plant, dispatch}) => {
+
   const WaterHandler = () => {
       plant.lastWateredTime = Date.now()
       dispatch(editPlant(plant))
-      console.log(plant)
+  }
+
+  function createDateTimeString (timestamp) {
+    const date = new Date(timestamp)
+    return date.getMinutes()
+  }
+
+    function timer ()
+  {
+    let timeLeft
+    let WaterFrequency = plant.WaterFrequency*3600*1000
+      timeLeft  = WaterFrequency - (Date.now() - plant.lastWateredTime) 
+      return createDateTimeString(timeLeft)
   }
 
   return (
     <>
-        <View style = {styles.wholecontainer}>
-            <Pressable style ={styles.container} onPress={()=>navigation.navigate("ManagePlant",{plant:plant})}>
-              <View style = {styles.child}><Text style={styles.commontext}>{plant.PlantName}</Text></View>
+        <View style = { styles.wholecontainer }>
+            <Pressable style ={ styles.container } onPress={ ()=> navigation.navigate("ManagePlant", { plant:plant }) }>
+              <View style = { styles.child }><Text style={ styles.commontext }>{ plant.PlantName }</Text></View>
             </Pressable>
-            <Pressable style={styles.waterclick} backgroundColor='green' onPress={WaterHandler}>
-              <Text>{plant.lastWateredTime? plant.lastWateredTime : null}</Text>
+            <Pressable style={ styles.waterclick } backgroundColor='green' onPress={ WaterHandler }>
+              <Text>{ plant.lastWateredTime?  timer(): null }</Text>
             </Pressable>
         </View>
     <Separator />

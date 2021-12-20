@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet,  View, Button } from 'react-native'
 import PlantScreen from './PlantScreen';
 import SpecieScreen from './SpecieScreen';
+import PurgeScreen from './PurgeScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -33,8 +34,17 @@ const HomeScreen = ({navigation}) => {
           color = focused
             ? 'green'
             : 'black';
-          }
-          // You can return any component that you like here!
+          } else if (route.name === 'Purge') {
+          iconName = focused 
+          ? "snow"
+          : "snow-outline" 
+          size = focused
+          ? 25
+          : 20;
+        color = focused
+          ? 'green'
+          : 'black';
+        }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'tomato',
@@ -42,6 +52,7 @@ const HomeScreen = ({navigation}) => {
       })}>
           <Tabs.Screen name="Plant" component = {PlantScreen} option = {{title: 'Plant'}}/>
           <Tabs.Screen name="Specie" component = {SpecieScreen} option = {{title: 'Species'}}/>
+          <Tabs.Screen name="Purge" component = {PurgeScreen} option = {{title: 'Purge'}}/>
         </Tabs.Navigator>
   )
 }

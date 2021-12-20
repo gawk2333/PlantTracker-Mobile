@@ -4,11 +4,16 @@ import { connect } from 'react-redux'
 import EachPlant from '../components/EachPlant'
 
 
-const PlantScreen = ({navigation,plants}) => {
+const PlantScreen = ({navigation, plants, species}) => {
+  let plantWithWaterTime = plants.map(plant => {
+      plantSpecie = species.filter( specie => specie.Common === plant.SpecieCommon)
+      plant.WaterFrequency = plantSpecie[0].WaterFrequency
+      return plant
+  })
   return (
     <View style = {styles.background}>
       <ScrollView contentContainerStyle={styles.plantlist} showsHorizontalScrollIndicator='false'>
-          {plants?.map(plant => {
+          {plantWithWaterTime?.map(plant => {
               return <EachPlant key={plant.PlantName} plant={plant} navigation={navigation}/>
           })}
         </ScrollView>
@@ -21,7 +26,8 @@ const PlantScreen = ({navigation,plants}) => {
 
 const mapStatetoProps = (state) => {
   return {
-    plants: state.plants
+    plants: state.plants,
+    species: state.species
   }
 }
 
