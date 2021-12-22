@@ -9,7 +9,7 @@ const reducer = (state = InitialState, action) => {
         return [...state,action.plants]
       case EDIT_PLANT:
         const editedState = [...state.filter(plant => plant.PlantName !== action.plants.PlantName), action.plants]
-        return editedState
+        return editedState.sort( compare )
       case DELETE_PLANT:
         return state.filter(plant => plant.PlantName !== action.plants.PlantName)
       case PURGE_PLANT:
@@ -17,6 +17,16 @@ const reducer = (state = InitialState, action) => {
       default:
         return state
     }
+}
+
+function compare( a, b ) {
+  if ( a.PlantName < b.PlantName ){
+    return -1;
+  }
+  if ( a.PlantName > b.PlantName ){
+    return 1;
+  }
+  return 0;
 }
 
 export default reducer
